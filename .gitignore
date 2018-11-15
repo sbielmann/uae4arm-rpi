@@ -5,3 +5,14 @@ kickstarts/*.rom
 savestates/*.uss
 screenshots/*.png
 /.project
+/capsimg/CAPSImg/Makefile
+/capsimg/CAPSImg/autom4te.cache/
+/capsimg/CAPSImg/config.h
+/capsimg/CAPSImg/config.h.in
+/capsimg/CAPSImg/config.log
+/capsimg/CAPSImg/config.status
+capsimg/CAPSImg/configure
+/capsimg/Makefile
+/capsimg/configure
+/capsimg/CAPSImg/libcapsimage.so.5.1
+/capsimg/capsimg.so

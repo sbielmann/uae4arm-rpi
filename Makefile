@@ -21,6 +21,11 @@ else ifeq ($(PLATFORM),generic-sdl)
 	endif
 	MORE_CFLAGS += -DARMV6T2
 	HAVE_SDL_DISPLAY = 1
+else ifeq ($(PLATFORM),gameshell)
+	CPU_FLAGS= -mcpu=cortex-a7 -mfpu=neon-vfpv4 -mfloat-abi=hard
+	MORE_CFLAGS += -DGAMESHELL -DARMV6T2 -DARM_HAS_DIV -DUSE_JIT_FPU
+	HAVE_SDL_DISPLAY = 1
+	HAVE_NEON = 1
 else ifeq ($(PLATFORM),gles)
 	# Autodetect Rpi
 	ifneq ($(findstring raspberrypi,$(shell uname -a)),)
@@ -107,7 +112,6 @@ endif
 ifdef USE_PROFILE
 MORE_CFLAGS += -fprofile-use -fbranch-probabilities -fvpt
 endif
-
 
 CAPS = capsimg.so
 

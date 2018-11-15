@@ -28,6 +28,10 @@ How to compile for raspberry:
 
       make PLATFORM=rpi1
 
+   Or for ClockworkPi GameShell:
+
+      make PLATFORM=gameshell -j 2
+
 For all ARM boards with OpenGLES:
 
    Install same packages as for raspberry.
