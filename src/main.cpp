@@ -652,7 +652,13 @@ void leave_program (void)
 
 static int real_main2 (int argc, TCHAR **argv)
 {
-  printf("Uae4arm v0.5 for Raspberry Pi by Chips\n");
+  printf("Uae4arm v0.5 for ");
+#ifdef GAMESHELL
+  printf("ClockWork Pi Gameshell");
+#else
+  printf("Raspberry Pi");
+#endif
+  printf(" by Chips\n");
   printf("Based on uae version: %i.%i.%i\n",UAEMAJOR,UAEMINOR,UAESUBREV);
 #ifdef GIT_VERSION
 
