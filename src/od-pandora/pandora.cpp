@@ -67,6 +67,7 @@ static int doStylusRightClick;
 extern void SetLastActiveConfig(const char *filename);
 
 /* Keyboard */
+int customKeyMap[SDLK_LAST];
 int customControlMap[SDLK_LAST];
 
 char start_path_data[MAX_DPATH];
@@ -331,6 +332,9 @@ void target_default_options (struct uae_prefs *p, int type)
 
 	p->picasso96_modeflags = RGBFF_CLUT | RGBFF_R5G6B5 | RGBFF_R8G8B8A8;
 	
+	for(int i=0; i<SDLK_LAST; i++) {
+		customKeyMap[i] = i;
+	}
 	memset(customControlMap, 0, sizeof(customControlMap));
 	
 	p->cr[CHIPSET_REFRESH_PAL].locked = true;
@@ -358,17 +362,27 @@ void target_save_options (struct zfile *f, struct uae_prefs *p)
   cfgfile_write (f, "pandora.cpu_speed", "%d", p->pandora_cpu_speed);
   cfgfile_write (f, "pandora.hide_idle_led", "%d", p->pandora_hide_idle_led);
   cfgfile_write (f, "pandora.tap_delay", "%d", p->pandora_tapDelay);
+  cfgfile_write (f, "pandora.key_for_a", "%d", customKeyMap[VK_A]);
+  cfgfile_write (f, "pandora.key_for_b", "%d", customKeyMap[VK_B]);
+  cfgfile_write (f, "pandora.key_for_x", "%d", customKeyMap[VK_X]);
+  cfgfile_write (f, "pandora.key_for_y", "%d", customKeyMap[VK_Y]);
+  cfgfile_write (f, "pandora.key_for_l", "%d", customKeyMap[VK_L]);
+  cfgfile_write (f, "pandora.key_for_r", "%d", customKeyMap[VK_R]);
+  cfgfile_write (f, "pandora.key_for_up", "%d", customKeyMap[VK_UP]);
+  cfgfile_write (f, "pandora.key_for_down", "%d", customKeyMap[VK_DOWN]);
+  cfgfile_write (f, "pandora.key_for_right", "%d", customKeyMap[VK_RIGHT]);
+  cfgfile_write (f, "pandora.key_for_left", "%d", customKeyMap[VK_LEFT]);
   cfgfile_write (f, "pandora.custom_controls", "%d", p->pandora_customControls);
-  cfgfile_write (f, "pandora.custom_up", "%d", customControlMap[VK_UP]);
-  cfgfile_write (f, "pandora.custom_down", "%d", customControlMap[VK_DOWN]);
-  cfgfile_write (f, "pandora.custom_left", "%d", customControlMap[VK_LEFT]);
-  cfgfile_write (f, "pandora.custom_right", "%d", customControlMap[VK_RIGHT]);
-  cfgfile_write (f, "pandora.custom_a", "%d", customControlMap[VK_A]);
-  cfgfile_write (f, "pandora.custom_b", "%d", customControlMap[VK_B]);
-  cfgfile_write (f, "pandora.custom_x", "%d", customControlMap[VK_X]);
-  cfgfile_write (f, "pandora.custom_y", "%d", customControlMap[VK_Y]);
-  cfgfile_write (f, "pandora.custom_l", "%d", customControlMap[VK_L]);
-  cfgfile_write (f, "pandora.custom_r", "%d", customControlMap[VK_R]);
+  cfgfile_write (f, "pandora.custom_up", "%d", customControlMap[customKeyMap[VK_UP]]);
+  cfgfile_write (f, "pandora.custom_down", "%d", customControlMap[customKeyMap[VK_DOWN]]);
+  cfgfile_write (f, "pandora.custom_left", "%d", customControlMap[customKeyMap[VK_LEFT]]);
+  cfgfile_write (f, "pandora.custom_right", "%d", customControlMap[customKeyMap[VK_RIGHT]]);
+  cfgfile_write (f, "pandora.custom_a", "%d", customControlMap[customKeyMap[VK_A]]);
+  cfgfile_write (f, "pandora.custom_b", "%d", customControlMap[customKeyMap[VK_B]]);
+  cfgfile_write (f, "pandora.custom_x", "%d", customControlMap[customKeyMap[VK_X]]);
+  cfgfile_write (f, "pandora.custom_y", "%d", customControlMap[customKeyMap[VK_Y]]);
+  cfgfile_write (f, "pandora.custom_l", "%d", customControlMap[customKeyMap[VK_L]]);
+  cfgfile_write (f, "pandora.custom_r", "%d", customControlMap[customKeyMap[VK_R]]);
   cfgfile_write (f, "pandora.move_y", "%d", p->pandora_vertical_offset - OFFSET_Y_ADJUST);
 }
 
@@ -395,17 +409,27 @@ int target_parse_option (struct uae_prefs *p, const char *option, const char *va
   int result = (cfgfile_intval (option, value, "cpu_speed", &p->pandora_cpu_speed, 1)
     || cfgfile_intval (option, value, "hide_idle_led", &p->pandora_hide_idle_led, 1)
     || cfgfile_intval (option, value, "tap_delay", &p->pandora_tapDelay, 1)
+    || cfgfile_intval (option, value, "key_for_a", &customKeyMap[VK_A], 1)
+    || cfgfile_intval (option, value, "key_for_b", &customKeyMap[VK_B], 1)
+    || cfgfile_intval (option, value, "key_for_x", &customKeyMap[VK_X], 1)
+    || cfgfile_intval (option, value, "key_for_y", &customKeyMap[VK_Y], 1)
+    || cfgfile_intval (option, value, "key_for_l", &customKeyMap[VK_L], 1)
+    || cfgfile_intval (option, value, "key_for_r", &customKeyMap[VK_R], 1)
+    || cfgfile_intval (option, value, "key_for_up", &customKeyMap[VK_UP], 1)
+    || cfgfile_intval (option, value, "key_for_down", &customKeyMap[VK_DOWN], 1)
+    || cfgfile_intval (option, value, "key_for_right", &customKeyMap[VK_RIGHT], 1)
+    || cfgfile_intval (option, value, "key_for_left", &customKeyMap[VK_LEFT], 1)
     || cfgfile_intval (option, value, "custom_controls", &p->pandora_customControls, 1)
-    || cfgfile_intval (option, value, "custom_up", &customControlMap[VK_UP], 1)
-    || cfgfile_intval (option, value, "custom_down", &customControlMap[VK_DOWN], 1)
-    || cfgfile_intval (option, value, "custom_left", &customControlMap[VK_LEFT], 1)
-    || cfgfile_intval (option, value, "custom_right", &customControlMap[VK_RIGHT], 1)
-    || cfgfile_intval (option, value, "custom_a", &customControlMap[VK_A], 1)
-    || cfgfile_intval (option, value, "custom_b", &customControlMap[VK_B], 1)
-    || cfgfile_intval (option, value, "custom_x", &customControlMap[VK_X], 1)
-    || cfgfile_intval (option, value, "custom_y", &customControlMap[VK_Y], 1)
-    || cfgfile_intval (option, value, "custom_l", &customControlMap[VK_L], 1)
-    || cfgfile_intval (option, value, "custom_r", &customControlMap[VK_R], 1)
+    || cfgfile_intval (option, value, "custom_up", &customControlMap[customKeyMap[VK_UP]], 1)
+    || cfgfile_intval (option, value, "custom_down", &customControlMap[customKeyMap[VK_DOWN]], 1)
+    || cfgfile_intval (option, value, "custom_left", &customControlMap[customKeyMap[VK_LEFT]], 1)
+    || cfgfile_intval (option, value, "custom_right", &customControlMap[customKeyMap[VK_RIGHT]], 1)
+    || cfgfile_intval (option, value, "custom_a", &customControlMap[customKeyMap[VK_A]], 1)
+    || cfgfile_intval (option, value, "custom_b", &customControlMap[customKeyMap[VK_B]], 1)
+    || cfgfile_intval (option, value, "custom_x", &customControlMap[customKeyMap[VK_X]], 1)
+    || cfgfile_intval (option, value, "custom_y", &customControlMap[customKeyMap[VK_Y]], 1)
+    || cfgfile_intval (option, value, "custom_l", &customControlMap[customKeyMap[VK_L]], 1)
+    || cfgfile_intval (option, value, "custom_r", &customControlMap[customKeyMap[VK_R]], 1)
     );
   if(!result) {
     result = cfgfile_intval (option, value, "move_y", &p->pandora_vertical_offset, 1);
