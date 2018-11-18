@@ -4555,7 +4555,11 @@ void default_prefs (struct uae_prefs *p, bool reset, int type)
   p->input_tablet = TABLET_OFF;
 
   p->key_for_menu = SDLK_F12;
+#ifdef GAMESHELL
+  p->key_for_quit = SDLK_ESCAPE;
+#else
   p->key_for_quit = 0;
+#endif
   p->button_for_menu = -1;
   p->button_for_quit = -1;
 
