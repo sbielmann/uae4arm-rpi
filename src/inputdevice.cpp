@@ -4874,6 +4874,8 @@ void inputdevice_default_prefs (struct uae_prefs *p)
 	p->input_selected_setting = GAMEPORT_INPUT_SETTINGS;
 #ifdef PANDORA_SPECIFIC
   p->input_joymouse_multiplier = 20;
+#elif defined GAMESHELL
+  p->input_joymouse_multiplier = 4;
 #else
   p->input_joymouse_multiplier = 2;
 #endif

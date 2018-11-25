@@ -372,6 +372,10 @@ void target_save_options (struct zfile *f, struct uae_prefs *p)
   cfgfile_write (f, "pandora.key_for_down", "%d", customKeyMap[VK_DOWN]);
   cfgfile_write (f, "pandora.key_for_right", "%d", customKeyMap[VK_RIGHT]);
   cfgfile_write (f, "pandora.key_for_left", "%d", customKeyMap[VK_LEFT]);
+#ifdef GAMESHELL
+  cfgfile_write (f, "pandora.key_for_select", "%d", customKeyMap[VK_SELECT]);
+  cfgfile_write (f, "pandora.key_for_start", "%d", customKeyMap[VK_START]);
+#endif
   cfgfile_write (f, "pandora.custom_controls", "%d", p->pandora_customControls);
   cfgfile_write (f, "pandora.custom_up", "%d", customControlMap[customKeyMap[VK_UP]]);
   cfgfile_write (f, "pandora.custom_down", "%d", customControlMap[customKeyMap[VK_DOWN]]);
@@ -383,6 +387,10 @@ void target_save_options (struct zfile *f, struct uae_prefs *p)
   cfgfile_write (f, "pandora.custom_y", "%d", customControlMap[customKeyMap[VK_Y]]);
   cfgfile_write (f, "pandora.custom_l", "%d", customControlMap[customKeyMap[VK_L]]);
   cfgfile_write (f, "pandora.custom_r", "%d", customControlMap[customKeyMap[VK_R]]);
+#ifdef GAMESHELL
+  cfgfile_write (f, "pandora.custom_select", "%d", customControlMap[customKeyMap[VK_SELECT]]);
+  cfgfile_write (f, "pandora.custom_start", "%d", customControlMap[customKeyMap[VK_START]]);
+#endif
   cfgfile_write (f, "pandora.move_y", "%d", p->pandora_vertical_offset - OFFSET_Y_ADJUST);
 }
 
@@ -419,6 +427,10 @@ int target_parse_option (struct uae_prefs *p, const char *option, const char *va
     || cfgfile_intval (option, value, "key_for_down", &customKeyMap[VK_DOWN], 1)
     || cfgfile_intval (option, value, "key_for_right", &customKeyMap[VK_RIGHT], 1)
     || cfgfile_intval (option, value, "key_for_left", &customKeyMap[VK_LEFT], 1)
+#ifdef GAMESHELL
+    || cfgfile_intval (option, value, "key_for_select", &customKeyMap[VK_SELECT], 1)
+    || cfgfile_intval (option, value, "key_for_start", &customKeyMap[VK_START], 1)
+#endif
     || cfgfile_intval (option, value, "custom_controls", &p->pandora_customControls, 1)
     || cfgfile_intval (option, value, "custom_up", &customControlMap[customKeyMap[VK_UP]], 1)
     || cfgfile_intval (option, value, "custom_down", &customControlMap[customKeyMap[VK_DOWN]], 1)
@@ -430,6 +442,10 @@ int target_parse_option (struct uae_prefs *p, const char *option, const char *va
     || cfgfile_intval (option, value, "custom_y", &customControlMap[customKeyMap[VK_Y]], 1)
     || cfgfile_intval (option, value, "custom_l", &customControlMap[customKeyMap[VK_L]], 1)
     || cfgfile_intval (option, value, "custom_r", &customControlMap[customKeyMap[VK_R]], 1)
+#ifdef GAMESHELL
+    || cfgfile_intval (option, value, "custom_select", &customControlMap[customKeyMap[VK_SELECT]], 1)
+    || cfgfile_intval (option, value, "custom_start", &customControlMap[customKeyMap[VK_START]], 1)
+#endif
     );
   if(!result) {
     result = cfgfile_intval (option, value, "move_y", &p->pandora_vertical_offset, 1);
@@ -1044,6 +1060,19 @@ int handle_msgpump (void)
   		  	inputdevice_add_inputcode(AKS_ENTERGUI, 1);
   		  if (currprefs.key_for_quit != 0 && rEvent.key.keysym.sym == currprefs.key_for_quit)
   		  	inputdevice_add_inputcode(AKS_QUIT, 1);
+#ifdef GAMESHELL
+				if (rEvent.key.keysym.sym == customKeyMap[VK_SELECT]) {
+					if (currprefs.jports[0].id == JPORT_NONE && currprefs.jports[1].id == JSEM_JOYS) { 
+						changed_prefs.jports[0].id = JSEM_MICE + 1;
+						changed_prefs.jports[1].id = JPORT_NONE;
+						inputdevice_updateconfig(NULL, &changed_prefs);
+					} else if (currprefs.jports[0].id == (JSEM_MICE + 1) && currprefs.jports[1].id == JPORT_NONE) { 
+						changed_prefs.jports[0].id = JPORT_NONE;
+						changed_prefs.jports[1].id = JSEM_JOYS;
+						inputdevice_updateconfig(NULL, &changed_prefs);
+					}
+				}
+#endif
 #ifdef ACTION_REPLAY
   		  if(rEvent.key.keysym.sym == currprefs.key_for_cartridge)
         		      if(currprefs.cartfile[0] != '\0') {

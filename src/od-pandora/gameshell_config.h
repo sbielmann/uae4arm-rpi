@@ -27,18 +27,6 @@
 #define VK_Y SDLK_i
 
 /*
- * Virtual Key for (Select) button
- * default: space (32)
- */
-#define VK_SELECT SDLK_SPACE
-
-/*
- * Virtual Key for (Start) button
- * default: return (13)
- */
-#define VK_START SDLK_RETURN
-
-/*
  * Virtual Key for (up) button
  * default: UP (273)
  */
@@ -68,14 +56,25 @@
  */
 #define VK_MENU SDLK_ESCAPE
 
+/*
+ * Virtual Key for (Select) button
+ * default: space (32)
+ */
+#define VK_SELECT SDLK_SPACE
+
+/*
+ * Virtual Key for (Start) button
+ * default: return (13)
+ */
+#define VK_START SDLK_RETURN
 
 
 /*
  * Do not change the followling lines. On Gameshell
- * we map left shoulder button of Pandora as Select
- * button, right should button as Start and Escape
- * as Menu button.
+ * we do not yet map left/right shoulder buttons,
+ * however home and end would be light keys L1 and
+ * L5. Menu button is mapped to escape.
  */
-#define VK_L VK_SELECT
-#define VK_R VK_START
+#define VK_L SDLK_HOME
+#define VK_R SDLK_END
 #define VK_ESCAPE VK_MENU

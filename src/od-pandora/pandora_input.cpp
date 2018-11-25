@@ -100,6 +100,13 @@ static int get_mouse_widget_type (int mouse, int num, TCHAR *name, uae_u32 *code
 
 static void read_mouse (void) 
 {
+#ifdef GAMESHELL
+	if(!mouseBut1viaCustom) {
+		Uint8 *keystate = SDL_GetKeyState(NULL);
+		setmousebuttonstate (0, 0, keystate[customKeyMap[VK_START]]); // Start button -> first mouse left button by default
+	}
+#endif
+
   if(currprefs.input_tablet > TABLET_OFF) {
     // Mousehack active
     int x, y;
@@ -121,7 +128,6 @@ static void read_mouse (void)
       setmousestate(1, 1, -mouseScale, 0);
     if(keystate[customKeyMap[VK_DOWN]])
       setmousestate(1, 1, mouseScale, 0);
-    
     if(!mouseBut1viaCustom)
       setmousebuttonstate (1, 0, keystate[customKeyMap[VK_A]]); // A button -> left mouse
     if(!mouseBut2viaCustom)
@@ -129,6 +135,7 @@ static void read_mouse (void)
   } 
    
   // Nubs as mouse handled in handle_msgpump()
+
 }
 
 
