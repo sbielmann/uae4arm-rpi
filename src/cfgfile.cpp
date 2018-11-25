@@ -3862,7 +3862,6 @@ bad:
 	write_log (_T("Bad joystick mode specification. Use -J xy, where x and y\n")
 		_T("can be 0 for joystick 0, 1 for joystick 1, M for mouse, and\n")
 		_T("a, b or c for different keyboard settings.\n"));
-
 	p->jports[0].id = v0;
 	p->jports[1].id = v1;
 }
@@ -4403,7 +4402,11 @@ void default_prefs (struct uae_prefs *p, bool reset, int type)
   memset (p, 0, sizeof (struct uae_prefs));
   _tcscpy (p->description, _T("UAE default configuration"));
 
+#ifdef GAMESHELL
+  p->start_gui = false;
+#else
   p->start_gui = true;
+#endif
 
   p->all_lines = 0;
 	p->z3_mapping_mode = Z3MAPPING_AUTO;
@@ -4419,8 +4422,13 @@ void default_prefs (struct uae_prefs *p, bool reset, int type)
 	p->jports[2].id = -1;
 	p->jports[3].id = -1;
 	if (reset) {
+#ifdef GAMESHELL
+		inputdevice_joyport_config_store(p, _T("none"), 0, -1, 0);
+		inputdevice_joyport_config_store(p, _T("joy0"), 1, -1, 0);
+#else
 		inputdevice_joyport_config_store(p, _T("mouse"), 0, -1, 0);
 		inputdevice_joyport_config_store(p, _T("joy1"), 1, -1, 0);
+#endif
 	}
 	p->keyboard_lang = KBD_LANG_US;
 
@@ -4442,7 +4450,7 @@ void default_prefs (struct uae_prefs *p, bool reset, int type)
   p->cachesize = 0;
 
   p->gfx_framerate = 0;
-#ifdef PANDORA_SPECIFIC
+#if defined(PANDORA_SPECIFIC) || defined(GAMESHELL)
   p->gfx_size.width = 320;
   p->gfx_size.height = 240;
 #else
@@ -4457,7 +4465,11 @@ void default_prefs (struct uae_prefs *p, bool reset, int type)
   p->kbd_led_scr = -1; // No status on scrollock
   p->kbd_led_cap = -1; // No status on capslock
 #endif
+#ifdef GAMESHELL
+	p->gfx_vresolution = VRES_NONDOUBLE;
+#else
 	p->gfx_vresolution = VRES_DOUBLE;
+#endif
 
   p->immediate_blits = 0;
 	p->waiting_blits = 0;
