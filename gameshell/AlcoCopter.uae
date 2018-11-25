@@ -1,0 +1,4 @@
+model=A500
+kickstart_rom_file=/home/cpi/games/Amiga/amiga-os-130.rom
+floppy0=/home/cpi/games/Amiga/alcocopter.adf
+nr_floppies=1

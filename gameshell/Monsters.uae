@@ -1,0 +1,3 @@
+model=A1200
+kickstart_rom_file=/home/cpi/games/Amiga/amiga-os-310-a1200.rom
+floppy0=/home/cpi/games/Amiga/monsters10.adf
