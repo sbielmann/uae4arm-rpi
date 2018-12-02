@@ -1,0 +1,6 @@
+model=A500
+kickstart_rom_file=/home/cpi/games/Amiga/amiga-os-130.rom
+floppy0=/home/cpi/games/Amiga/turrican2.adf
+
+pandora.custom_controls=1
+pandora.custom_y=64

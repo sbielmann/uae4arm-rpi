@@ -1,0 +1,7 @@
+model=A500
+kickstart_rom_file=/home/cpi/games/Amiga/amiga-os-130.rom
+floppy0=/home/cpi/games/Amiga/hybris.adf
+
+pandora.custom_controls=1
+pandora.custom_a=68
+pandora.custom_y=64
