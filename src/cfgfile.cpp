@@ -3025,6 +3025,17 @@ static int cfgfile_parse_hardware (struct uae_prefs *p, const TCHAR *option, TCH
   int tmpval, dummyint, i;
   TCHAR tmpbuf[CONFIG_BLEN];
 
+#ifdef GAMESHELL
+	if (strcasecmp (option, _T("model")) == 0) {
+		int model = 0;
+		cfgfile_strval (option, value, option, &model, qsmodes,  0);
+		if (model >= 0) {
+			built_in_prefs (p, model, 0, 0, 0);
+		}
+		return 1;
+	}
+#endif
+
   if (cfgfile_yesno (option, value, _T("immediate_blits"), &p->immediate_blits)
 	  || cfgfile_yesno (option, value, _T("fast_copper"), &p->fast_copper)
 		|| cfgfile_yesno(option, value, _T("fpu_no_unimplemented"), &p->fpu_no_unimplemented)
@@ -3271,17 +3282,6 @@ static int cfgfile_parse_hardware (struct uae_prefs *p, const TCHAR *option, TCH
       p->m68k_speed = -1;
   	return 1;
   }
-
-#ifdef GAMESHELL
-	if (strcasecmp (option, _T("model")) == 0) {
-		int model = 0;
-		cfgfile_strval (option, value, option, &model, qsmodes,  0);
-		if (model >= 0) {
-			built_in_prefs (p, model, 0, 0, 0);
-		}
-		return 1;
-	}
-#endif
 
 	if (strcasecmp (option, _T("quickstart")) == 0) {
 		int model = 0;
