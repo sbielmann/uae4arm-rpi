@@ -388,7 +388,6 @@ void target_save_options (struct zfile *f, struct uae_prefs *p)
   cfgfile_write (f, "pandora.custom_l", "%d", customControlMap[customKeyMap[VK_L]]);
   cfgfile_write (f, "pandora.custom_r", "%d", customControlMap[customKeyMap[VK_R]]);
 #ifdef GAMESHELL
-  cfgfile_write (f, "pandora.custom_select", "%d", customControlMap[customKeyMap[VK_SELECT]]);
   cfgfile_write (f, "pandora.custom_start", "%d", customControlMap[customKeyMap[VK_START]]);
 #endif
   cfgfile_write (f, "pandora.move_y", "%d", p->pandora_vertical_offset - OFFSET_Y_ADJUST);
@@ -443,7 +442,6 @@ int target_parse_option (struct uae_prefs *p, const char *option, const char *va
     || cfgfile_intval (option, value, "custom_l", &customControlMap[customKeyMap[VK_L]], 1)
     || cfgfile_intval (option, value, "custom_r", &customControlMap[customKeyMap[VK_R]], 1)
 #ifdef GAMESHELL
-    || cfgfile_intval (option, value, "custom_select", &customControlMap[customKeyMap[VK_SELECT]], 1)
     || cfgfile_intval (option, value, "custom_start", &customControlMap[customKeyMap[VK_START]], 1)
 #endif
     );

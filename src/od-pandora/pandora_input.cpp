@@ -100,13 +100,6 @@ static int get_mouse_widget_type (int mouse, int num, TCHAR *name, uae_u32 *code
 
 static void read_mouse (void) 
 {
-#ifdef GAMESHELL
-	if(!mouseBut1viaCustom) {
-		Uint8 *keystate = SDL_GetKeyState(NULL);
-		setmousebuttonstate (0, 0, keystate[customKeyMap[VK_START]]); // Start button -> first mouse left button by default
-	}
-#endif
-
   if(currprefs.input_tablet > TABLET_OFF) {
     // Mousehack active
     int x, y;

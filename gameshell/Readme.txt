@@ -29,8 +29,9 @@ Index
    3.2 Monsters of Terror on A1200
    3.3 Barbarian Plus on A1200
    3.4 TimeGal on CD32
-   3.5 Extra controls
-   3.6 Default configuration settings
+   3.5 Giana Sisters SE
+   3.6 Extra controls
+   3.7 Default configuration settings
 4. Controls
    4.1 Gameshell buttons
    4.2 Remap Gameshell buttons
@@ -106,7 +107,8 @@ games/Amiga
 
 You will find a couple of example UAE configuration files in this directory.
 For the free games Alco Copter on A500, Monsters of Terror and Barbarian Plus
-on A1200 and Time Gal on CD32. Also the commercial games Hybris and Turrican2.
+on A1200 and Time Gal or Giana Sisters SE on CD32. Also the commercial games
+Hybris and Turrican2 with customized extra controls .
 
 The examples use ROM files and ROM key from Amiga Forever. You may as well
 take your own ROM files, e.g. made with TransROM, in that case no ROM key
@@ -190,7 +192,7 @@ floppy3=/home/cpi/games/Amiga/barbarian_plus_4.adf
 What you need:
 - amiga-os-310-cd32.rom, amiga-os-310-cd32-ext.rom, and rom.key
 - Time Gal game, TimeGal.iso file, download from:
-  http://unofficial-cd32-ports.blogspot.com/2017/03/001-time-gal-reimagine.html
+  https://pixelglass.org
 - TimeGal.uae
 
 The UAE configuration file tells that we want a CD32, with OS 310 for CD32
@@ -203,7 +205,12 @@ kickstart_ext_rom_file=/home/cpi/games/Amiga/amiga-os-310-cd32-ext.rom
 flash_file=/home/cpi/games/Amiga/cd32.nvr
 cdimage0=/home/cpi/games/Amiga/TimeGal.iso,image
 
-3.5 Extra controls
+3.5 Giana Sisters SE
+
+Same as TimeGal, download from same place, however:
+- GianaSistersSE.uae
+
+3.6 Extra controls
 
 Some games need more than just the normal Joystick input used for directions
 and the fire button. Hybris for example uses the RETURN key to expand the ship
@@ -225,7 +232,7 @@ pandora.custom_y=64
 
 More details on controls and customization in Controls section.
 
-3.6 Default configuration settings
+3.7 Default configuration settings
 
 UAE provides a large set of configuration options, among them here the default
 values used for Gameshell unless you set other values inside the configuration
@@ -269,7 +276,7 @@ emulator by default.
 MENU   : exit emulator go back to Gameshell menu
 Shift  : unused for now, however sends shift key to Amiga
 Select : switch between joystick and mouse input
-Start  : left mouse button when in joystick mode
+Start  : sends mapped key to Amiga
 A      : left mouse button when in mouse mode
          GREEN button on CD32 controller
 B      : right mouse button when in mouse mode
@@ -423,3 +430,6 @@ Customizing the Gameshell button key mapping is not implemented in UI yet.
 
 Maybe using a second joystick over bluetooth could be an idea for 2 player
 games.
+
+
+Maybe provide customizable mapping for save and load state functionality.
