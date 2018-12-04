@@ -1,6 +1,10 @@
 model=A1200
 kickstart_rom_file=/home/cpi/games/Amiga/amiga-os-310-a1200.rom
 nr_floppies=4
+floppy0type=0
+floppy1type=0
+floppy2type=0
+floppy3type=0
 floppy0=/home/cpi/games/Amiga/barbarian_plus_1.adf
 floppy1=/home/cpi/games/Amiga/barbarian_plus_2.adf
 floppy2=/home/cpi/games/Amiga/barbarian_plus_3.adf

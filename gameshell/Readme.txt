@@ -176,12 +176,16 @@ What you need:
 
 The UAE configuration file tells that we want an A1200, with OS 310 for A1200
 and use the 4 first floppies of Barbarian Plus. It also tells that the Amiga
-has 4 floppy drives. For instance there is no way however to swap to floppies
-5 and 6 of this game:
+has 4 floppy drives and which type they are, DD that is. For instance there
+is no way however to swap to floppies 5 and 6 of this game:
 
 model=A1200
 kickstart_rom_file=/home/cpi/games/Amiga/amiga-os-310-a1200.rom
 nr_floppies=4
+floppy0type=0
+floppy1type=0
+floppy2type=0
+floppy3type=0
 floppy0=/home/cpi/games/Amiga/barbarian_plus_1.adf
 floppy1=/home/cpi/games/Amiga/barbarian_plus_2.adf
 floppy2=/home/cpi/games/Amiga/barbarian_plus_3.adf
