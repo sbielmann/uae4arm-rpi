@@ -1,0 +1,6 @@
+model=CD32
+kickstart_rom_file=/home/cpi/games/Amiga/amiga-os-310-cd32.rom
+kickstart_ext_rom_file=/home/cpi/games/Amiga/amiga-os-310-cd32-ext.rom
+flash_file=/home/cpi/games/Amiga/cd32.nvr
+cdimage0=/home/cpi/games/Amiga/DeluxeGalagaCD32IMAGE.iso,image
+pandora.move_y=4

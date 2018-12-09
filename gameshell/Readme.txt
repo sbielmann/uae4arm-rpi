@@ -29,14 +29,21 @@ Index
    3.2 Monsters of Terror on A1200
    3.3 Barbarian Plus on A1200
    3.4 TimeGal on CD32
-   3.5 Giana Sisters SE
-   3.6 Extra controls
-   3.7 Default configuration settings
+   3.5 Giana Sisters SE on CD32
+   3.6 Deluxe Galaga on CD32
+   3.7 Extra controls
+   3.8 Default configuration settings
 4. Controls
    4.1 Gameshell buttons
    4.2 Remap Gameshell buttons
    4.3 Customize Amiga controls
 5. Technical notes
+   5.1 User interface
+   5.2 Screen height limitation
+   5.3 Select button
+   5.4 Volume control
+   5.5 Two player games
+   5.6 Save/load state
 
 
 ------------------------------------
@@ -107,8 +114,8 @@ games/Amiga
 
 You will find a couple of example UAE configuration files in this directory.
 For the free games Alco Copter on A500, Monsters of Terror and Barbarian Plus
-on A1200 and Time Gal or Giana Sisters SE on CD32. Also the commercial games
-Hybris and Turrican2 with customized extra controls .
+on A1200 and Time Gal, Giana Sisters SE or Deluxe Galaga on CD32. Also the
+commercial games Hybris and Turrican2 with customized extra controls.
 
 The examples use ROM files and ROM key from Amiga Forever. You may as well
 take your own ROM files, e.g. made with TransROM, in that case no ROM key
@@ -209,12 +216,20 @@ kickstart_ext_rom_file=/home/cpi/games/Amiga/amiga-os-310-cd32-ext.rom
 flash_file=/home/cpi/games/Amiga/cd32.nvr
 cdimage0=/home/cpi/games/Amiga/TimeGal.iso,image
 
-3.5 Giana Sisters SE
+3.5 Giana Sisters SE on CD32
 
 Same as TimeGal, download from same place, however:
 - GianaSistersSE.uae
 
-3.6 Extra controls
+3.6 Deluxe Galaga on CD32
+
+You may download Deluxe Galaga from: https://www.amigafuture.de/ for free.
+This game does not fit entirely on the screen, that is why we have to shift
+the Y axis to see at least the game scores and whole ship width. Example
+configuration file is:
+- DeluxeGalaga.uae
+
+3.7 Extra controls
 
 Some games need more than just the normal Joystick input used for directions
 and the fire button. Hybris for example uses the RETURN key to expand the ship
@@ -236,7 +251,7 @@ pandora.custom_y=64
 
 More details on controls and customization in Controls section.
 
-3.7 Default configuration settings
+3.8 Default configuration settings
 
 UAE provides a large set of configuration options, among them here the default
 values used for Gameshell unless you set other values inside the configuration
@@ -391,6 +406,8 @@ CD32 rwd            -13
 
 5. Technical notes
 
+5.1 User interface
+
 The menu UI is made for a resolution of 800 x 600, so it does not fit on
 Gameshell yet. Even more, without a virtual keyboard, it will be hard to
 enter a name for new configurations. Easiest way at the moment is to connect
@@ -411,29 +428,41 @@ The data directory contains fonts and icons needed by the menu, and uae4arm
 requires to be started right where it's data sub directory is located.
 That is why uae4armsh first does a cd, then start uae4arm.
 
-
 Although there is no problem to compile uae4arm with the menu resolution
 set to 320 x 240 for Gameshell, the UI layout itself would need to be
 overworked first. The components are of course still placed for 800 x 600
 and for instance not really useful that way on Gameshell.
 
+Customizing the Gameshell button key mapping is not implemented in UI yet.
+
+5.2 Screen height limitation
 
 PAL screen mode is 320 x 256, however Gameshell has only 320 x 240. This means
-that the lower 16 pixels are cut off. NTSC however with 320 x 240 does not have
-this issue. E-UAE could have a solution for this that might also be implemented
-here in the future. Also uae4arm-rpi has some kind of screen resizing for
-Raspberry Pi implemented, but not tested yet.
+that 16 pixels, usually the lower ones, are cut off. NTSC however with
+320 x 240 does not have this issue. E-UAE or libretro-uae could have a solution
+for this that might also be implemented here in the future. Also uae4arm-rpi has
+some kind of screen resizing for Raspberry Pi implemented, but not tested yet.
+
+For instance, as for example with Deluxe Galaga, the only work around is to
+center the screen vertically as good as possible with pandora.move_y option.
+
+5.3 Select button
+
+Select button does switch between mouse and joystick as expected, however is
+also sending a space bar key press to Amiga. This could be corrected.
+
+5.4 Volume control
 
 Volume control is not implemented. Could have a look at uae4arm-libretro which
 has it implemented, however of course with Libretro as backend. Maybe this is
-just an SDL audio volume feature.
+just an SDL audio volume feature. However AKS_VOLDOWN and AKS_VOLUP constants
+do already exist here.
 
-
-Customizing the Gameshell button key mapping is not implemented in UI yet.
-
+5.5 Two player games
 
 Maybe using a second joystick over bluetooth could be an idea for 2 player
 games.
 
+5.6 Save/load state
 
 Maybe provide customizable mapping for save and load state functionality.
