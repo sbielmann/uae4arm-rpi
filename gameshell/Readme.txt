@@ -223,10 +223,11 @@ Same as TimeGal, download from same place, however:
 
 3.6 Deluxe Galaga on CD32
 
-You may download Deluxe Galaga from: https://www.amigafuture.de/ for free.
+Base system as before for CD32 examples. You may download Deluxe Galaga from:
+https://www.amigafuture.de/downloads.php?view=detail&df_id=2270
 This game does not fit entirely on the screen, that is why we have to shift
-the Y axis to see at least the game scores and whole ship width. Example
-configuration file is:
+the Y axis to see at least the game scores and whole width of the ship.
+Example configuration file is:
 - DeluxeGalaga.uae
 
 3.7 Extra controls
