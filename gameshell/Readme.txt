@@ -311,9 +311,11 @@ L2-L4  : unused for now
 
 4.2 Remap Gameshell buttons
 
-If you have a non default mapping for your Gameshell buttons, then you may tell
-the emulator which key's that you have mapped to the buttons with the following
-configuration options:
+In case you have a non default mapping for your Gameshell buttons, you may
+either choose to compile the emulator with matching mapping, see file
+gameshell_config.h for more details. Or you you may tell the emulator which
+key's that you have mapped to the buttons with the following configuration
+options:
 
 pandora.key_for_a
 pandora.key_for_b
