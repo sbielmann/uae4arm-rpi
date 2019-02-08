@@ -59,16 +59,32 @@ line, you will have to confirm the installation with Y key:
 
 sudo apt-get install libguichan-sdl-0.8.1
 
-Copy paste the following 2 lines to your SSH console:
+For OS 0.1:
+
+  Copy paste the following 2 lines to your SSH console:
  
-mkdir /home/cpi/apps/launcher/Menu/GameShell/20_Retro\ Games/Amiga
-mkdir /home/cpi/games/Amiga
+  mkdir /home/cpi/apps/launcher/Menu/GameShell/20_Retro\ Games/Amiga
+  mkdir /home/cpi/games/Amiga
 
-Copy the file action.config to:
-/home/cpi/apps/launcher/Menu/GameShell/20_Retro Games/Amiga/action.config
+  Copy the file action.config to:
+  /home/cpi/apps/launcher/Menu/GameShell/20_Retro Games/Amiga/action.config
 
-Copy the file Amiga.png to:
-/home/cpi/apps/launcher/skin/default/Menu/GameShell/20_Retro Games/Amiga.png
+  Copy the file Amiga.png to:
+  /home/cpi/apps/launcher/skin/default/Menu/GameShell/20_Retro Games/Amiga.png
+
+For OS 0.2 or newer:
+
+  Copy paste the following 2 lines to your SSH console:
+ 
+  mkdir /home/cpi/launcher/Menu/GameShell/20_Retro\ Games/Amiga
+  mkdir /home/cpi/games/Amiga
+
+  Copy the file action.config to:
+  /home/cpi/launcher/Menu/GameShell/20_Retro Games/Amiga/action.config
+
+  Copy the file Amiga.png to:
+  /home/cpi/launcher/skin/default/Menu/GameShell/20_Retro Games/Amiga.png
+
 
 Now you have to either restart your Gameshell, or start RetroArch and quit
 it again, so that the new launcher menu is reloaded.
